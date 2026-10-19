@@ -42,4 +42,4 @@ Each snapshot's git history is not included; the changes against upstream are li
   (`check_hooks.py versionlib-1-7-104-0.bin SkyrimSE.exe 14988+0x6E:E8 ...`).
 
 All credit for the plugins goes to their authors; each fork keeps the original licence. The scripts in this
-repository are MIT-licensed.
+repository are licensed under the GNU General Public License v3.0 (see LICENSE).

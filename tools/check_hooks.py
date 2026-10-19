@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: GPL-3.0-or-later
 """Resolve Address Library IDs against a SkyrimSE.exe and dump the bytes at hook sites.
 
 Usage: check_hooks.py <versionlib-*.bin> <SkyrimSE.exe> ID+OFFSET[:expect] ...
