@@ -1,0 +1,5 @@
+stage/
+source-stage/
+*.7z
+README-*.md
+__pycache__/
