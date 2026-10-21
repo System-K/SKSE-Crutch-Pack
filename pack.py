@@ -8,7 +8,7 @@ tested in-game (the hashes are written to the package's file list so they can be
 import hashlib, html, shutil, subprocess
 from pathlib import Path
 
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 REPOS = Path("/mnt/h/dev/modding/skse-hotfixes")
 OUT = REPOS / "crutch-pack"
 STAGE = OUT / "stage"
@@ -59,6 +59,15 @@ FIXES = [
     dict(key="SurvivalControlPanel", title="Survival Control Panel", nexus=41891, ver="1.1.2", author="Parapets and colinswrath",
          repo="survivalcontrolpanel", dlls=["build/linux/SurvivalControlPanel.dll"], lic="MIT",
          what="The authors' own update (1.1.3 on GitHub, Address Library v5, September 2026) built as-is - it is not on Nexus yet. Only the DLL is replaced; ESP, BSA and scripts of 1.1.2 are unchanged."),
+    dict(key="ModelSwapper", title="Model Swapper", nexus=136461, ver="1.3", author="Thiago099",
+         repo="modelswapper", dlls=["build/linux-clangcl-release/ModelSwapper.dll"], lic="MIT",
+         what="Source of 1.3 rebuilt against CommonLibSSE-NG 11 (Address Library v5). No code change. Only the DLL is replaced; keep the original ModelSwapper.ini."),
+    dict(key="FactionWardrobe", title="Faction Wardrobe", nexus=195450, ver="1", author="BlackKnight19 (GitHub: Theslushbeast)",
+         repo="factionwardrobe", dlls=["build/linux-clangcl-release/FactionWardrobe.dll"], lic="GPL-3.0",
+         what="Rebuilt against CommonLibSSE-NG 11; the runtime check now accepts 1.6.1170 and newer (it refused 1.7.x, which made S.L.A.C.K. crash). The menu is in the SKSE Menu Framework (F1). Log notes added when SMF is missing."),
+    dict(key="UniversalArrowSpin", title="Universal Arrow Spin", nexus=171136, ver="1.1", author="RavenKZP",
+         repo="arrowspin", dlls=["build/linux/UniversalArrowSpin.dll"], lic="MIT",
+         what="Source of 1.1 rebuilt against CommonLibSSE-NG 11 (Address Library v5). No code change."),
 ]
 
 

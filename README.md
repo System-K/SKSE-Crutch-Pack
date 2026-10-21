@@ -6,7 +6,7 @@ a crutch until the original authors release their own updates. Download: Nexus M
 This repository contains the packaging script and tools. The source of every DLL lives in a fork of the
 original repository, on a `hotfix/...` branch, so the changes against upstream are visible commit by commit.
 
-## Fixes in version 1.1.0
+## Fixes in version 1.2.0
 
 | Fix | Original (Nexus) | Original author | Licence | Hotfix source | What changed |
 |---|---|---|---|---|---|
@@ -19,6 +19,9 @@ original repository, on a `hotfix/...` branch, so the changes against upstream a
 | Hair Colour Sync NG | [156414](https://www.nexusmods.com/skyrimspecialedition/mods/156414) v1.3.1 | jg1, NG port by kingeric1992 | MIT | [HairColourSyncNg](https://github.com/System-K/HairColourSyncNg/tree/hotfix/1.7.104) (upstream: [kingeric1992/HairColourSyncNg](https://github.com/kingeric1992/HairColourSyncNg)) | Rebuilt against CommonLibSSE-NG 11 (the original could not read the new Address Library); one renamed geometry field updated. The armour hook site is unchanged in 1.7.104. |
 | How to sit sleep meditate and fall... anywhere | [167371](https://www.nexusmods.com/skyrimspecialedition/mods/167371) v1.8.9 | Preguissoso (DLL based on powerofthree's Sandbox When Idle) | GPL-3.0 | [SandboxWhenIdle](https://github.com/System-K/SandboxWhenIdle/tree/hotfix/how-to-sit) (upstream: [powerof3/SandboxWhenIdle](https://github.com/powerof3/SandboxWhenIdle)) | Replacement Actions.dll: powerofthree's Sandbox When Idle (already updated for 1.7.99 by po3) plus a reimplementation of the mod's Papyrus functions (NSA_SandBox), packages, mod events and input rules. Install over the original. |
 | Survival Control Panel | [41891](https://www.nexusmods.com/skyrimspecialedition/mods/41891) v1.1.2 | Parapets and colinswrath | MIT | [SurvivalControlPanel](https://github.com/System-K/SurvivalControlPanel/tree/hotfix/1.7.104) (upstream: [colinswrath/SurvivalControlPanel](https://github.com/colinswrath/SurvivalControlPanel)) | The authors' own update (1.1.3 on GitHub, Address Library v5, September 2026) built as-is - it is not on Nexus yet. Only the DLL is replaced; ESP, BSA and scripts of 1.1.2 are unchanged. |
+| Model Swapper | [136461](https://www.nexusmods.com/skyrimspecialedition/mods/136461) v1.3 | Thiago099 | MIT | [Model-Swapper](https://github.com/System-K/Model-Swapper/tree/hotfix/1.7.104) (upstream: [Thiago099/Model-Swapper](https://github.com/Thiago099/Model-Swapper)) | Source of 1.3 rebuilt against CommonLibSSE-NG 11 (Address Library v5). No code change. Only the DLL is replaced; keep the original ModelSwapper.ini. |
+| Faction Wardrobe | [195450](https://www.nexusmods.com/skyrimspecialedition/mods/195450) v1 | BlackKnight19 (GitHub: Theslushbeast) | GPL-3.0 | [faction-wardrobe](https://github.com/System-K/faction-wardrobe/tree/hotfix/1.7.104) (upstream: [Theslushbeast/faction-wardrobe](https://github.com/Theslushbeast/faction-wardrobe)) | Rebuilt against CommonLibSSE-NG 11; the runtime check now accepts 1.6.1170 and newer (it refused 1.7.x, which made S.L.A.C.K. crash). The menu is in the SKSE Menu Framework (F1). Log notes added when SMF is missing. |
+| Universal Arrow Spin | [171136](https://www.nexusmods.com/skyrimspecialedition/mods/171136) v1.1 | RavenKZP | MIT | [Universal-Arrow-Spin](https://github.com/System-K/Universal-Arrow-Spin/tree/hotfix/1.7.104) (upstream: [RavenKZP/Universal-Arrow-Spin](https://github.com/RavenKZP/Universal-Arrow-Spin)) | Source of 1.1 rebuilt against CommonLibSSE-NG 11 (Address Library v5). No code change. |
 
 ## Building
 
