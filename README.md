@@ -41,6 +41,7 @@ Each snapshot's git history is not included; the changes against upstream are li
 ## This repository
 
 - `pack.py` - builds the FOMOD and the source archive from the hotfix repositories (paths are set at the top).
+- `pack_single.py` - builds stand-alone packages (DLL + source) for hotfixes of mods without an explicit licence; published only with the author's permission.
 - `tools/check_hooks.py` - resolves Address Library v5 IDs against a SkyrimSE.exe and checks the bytes at hook sites
   (`check_hooks.py versionlib-1-7-104-0.bin SkyrimSE.exe 14988+0x6E:E8 ...`).
 
