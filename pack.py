@@ -8,8 +8,9 @@ tested in-game (the hashes are written to the package's file list so they can be
 import hashlib, html, shutil, subprocess
 from pathlib import Path
 
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 REPOS = Path("/mnt/h/dev/modding/skse-hotfixes")
+MODS = Path("/home/cinnabar/.local/share/eidos/skyrimse/mods")  # in-game test mods (tested DLLs)
 OUT = REPOS / "crutch-pack"
 STAGE = OUT / "stage"
 NAME = "SKSE Crutch Pack"
@@ -68,6 +69,40 @@ FIXES = [
     dict(key="UniversalArrowSpin", title="Universal Arrow Spin", nexus=171136, ver="1.1", author="RavenKZP",
          repo="arrowspin", dlls=["build/linux/UniversalArrowSpin.dll"], lic="MIT",
          what="Source of 1.1 rebuilt against CommonLibSSE-NG 11 (Address Library v5). No code change."),
+    dict(key="YouCanSleep", title="You Can Sleep Remake", nexus=36057, ver="1.0.2", author="gottyduke",
+         repo="youcansleep", dlls=["build/linux/YouCanSleepRemake.dll"], lic="MIT",
+         what="Rebuilt against CommonLibSSE-NG 11 (the 2022 DLL could not read the new Address Library). All 9 byte patches checked against 1.7.104 - same offsets. Keep the original YouCanSleepRemake.toml."),
+    dict(key="Transmog", title="Skyrim Armor and Cloth Transmog", nexus=174356, ver="1.7.3", author="okan1100",
+         repo="transmog", dlls=["build/linux/SkyrimTransmogUI.dll"], lic="MIT",
+         what="The repository had no build system; added one and rebuilt against CommonLibSSE-NG 11. Five slot-mask reads adapted to the NG 11 API, no behaviour change. Needs PrismaUI like the original."),
+    dict(key="DynamicScarring", title="Dynamic Scarring and Healing", nexus=156627, ver="1.2", author="endermannnn (GitHub: Jehan1241)",
+         repo="dynamicscarring", dlls=[str(MODS / "SKSE Hotfix - Dynamic Scarring and Healing (Test)/SKSE/Plugins/DynamicScarringAndHealing.dll")],
+         lic="GPL-3.0",
+         what="Rebuilt against CommonLibSSE-NG 11 (the original used a CommonLib from before Address Library v5). No hooks, no behaviour change."),
+    dict(key="ConjurationLimitFix", title="Conjuration Limit Fix", nexus=117155, ver="1.4.1", author="Asrak",
+         repo="conjurationlimitfix", dlls=[str(MODS / "ConjurationLimitFix-1.4.1-hotfix-1.7.104-TEST/SKSE/Plugins/SummonActorLimitOverhaul.dll")],
+         lic="MIT",
+         what="Ported to CommonLibSSE-NG 11 with the 1.7.104 layout of the commanded-actor data. Both call sites are checked byte by byte at start; on any other game version the plugin does nothing instead of patching."),
+    dict(key="OARIEDConditions", title="Open Animation Replacer - IED conditions", nexus=98308, ver="1.0.1", author="SlavicPotato",
+         repo="oar-iedconditions", dlls=[str(MODS / "OAR-IEDConditionExtensions-1.0.1-hotfix-1.7.104-TEST/SKSE/Plugins/OpenAnimationReplacer-IEDConditionExtensions.dll")],
+         lic="GPL-3.0 (with exceptions)", lic_files=["COPYING", "EXCEPTIONS"],
+         what="Rebuilt against CommonLibSSE-NG 11 (7 lines of API adaptation). The IED conditions need Immersive Equipment Displays installed."),
+    dict(key="MainMenuRandomizer", title="Main Menu Randomizer SE", nexus=33574, ver="2.0.4", author="Lanastara",
+         repo="mainmenurandomizer", dlls=[str(MODS / "MainMenuRandomizerSE-2.0.4-hotfix-1.7.104-TEST/SKSE/Plugins/main_menu_randomizer.dll")],
+         lic="no licence file - rebuilt on the author's invitation to continue the mod (see PERMISSION.md)", lic_files=["PERMISSION.md"],
+         what="The author's Rust source 2.0.4 rebuilt unchanged with current SKSE plugin metadata for 1.7.104. Packs go into Data/mainmenuwallpapers/<name>/ (main menu) and Data/splashscreens/<name>/ (start splash)."),
+    dict(key="SanguinesTrade", title="Sanguine's Trade - An Economy Mod", nexus=185788, ver="1.0.7b", author="Juntii",
+         repo="sanguinestrade", dlls=[str(MODS / "SKSE Hotfix - Sanguines Trade (Test) 1.0.0-hotfix/SKSE/Plugins/SanguinesTrade.dll")],
+         lic="no licence file - permissions tab: \"Hey ya'll, go nuts with this.\" (see PERMISSION.md)", lic_files=["PERMISSION.md"],
+         what="The PrismaUI bridge DLL (plugin version 1.0.0, also used by 1.0.7b) ported to CommonLibSSE-NG 11; one engine field access updated. Needs PrismaUI like the original."),
+    dict(key="OBodyNGWeight", title="OBodyNG Weight", nexus=182452, ver="1.6.1", author="Fuzi (GitHub: OFuziCoder)",
+         repo="obodyngweight", dlls=[str(MODS / "OBodyNGWeight-1.6.1-hotfix-1.7.104-TEST(2)/SKSE/Plugins/OBodyNGWeight.dll")],
+         lic="GPL-3.0-or-later",
+         what="Ported to CommonLibSSE-NG 11 (no engine hooks). The crosshair-target read used the VR memory layout and is corrected for SE; HUD notifications and one shader-data read adapted to the NG 11 API. Keep the original ini, ESP and scripts."),
+    dict(key="SeasonsUnfrozen", title="Seasons of Skyrim - Unfrozen Extender", nexus=178786, ver="1.1 (CS)", author="RavenKZP",
+         repo="seasonsunfrozen", dlls=[str(MODS / "SeasonsUnfrozen-1.1-hotfix-1.7.104-TEST/SKSE/Plugins/SeasonsOfSkyrimUnfrozen.dll")],
+         lic="no licence file - Nexus permissions allow bug-fix releases with credit (see PERMISSION.md)", lic_files=["PERMISSION.md"],
+         what="Source of the CS compatibility update rebuilt against CommonLibSSE-NG 11. No C++ change (one vtable hook, slot unchanged in 1.7.104)."),
 ]
 
 
@@ -96,13 +131,16 @@ def main():
         pairs = zip(repos * len(f["dlls"]) if len(repos) == 1 else repos, f["dlls"])
         hashes = []
         for repo, dll in pairs:
-            src = REPOS / repo / dll
+            # absolute path = the DLL of the in-game test mod (cloud/agent builds have no local build dir)
+            src = Path(dll) if dll.startswith("/") else REPOS / repo / dll
             shutil.copy2(src, dll_dir / src.name)
             hashes.append(f"{src.name} sha256 {sha(src)[:16]}")
         for repo in repos:
             r = REPOS / repo
-            lic = next(p for p in sorted(r.iterdir()) if p.name.upper().startswith("LICEN"))
-            shutil.copy2(lic, docs / "Licenses" / f"{repo}-{lic.name}")
+            lic_files = [r / n for n in f["lic_files"]] if "lic_files" in f else \
+                [next(p for p in sorted(r.iterdir()) if p.name.upper().startswith("LICEN"))]
+            for lic in lic_files:
+                shutil.copy2(lic, docs / "Licenses" / f"{repo}-{lic.name}")
             commit = sh("git", "rev-parse", "--short", "HEAD", cwd=r)
             url = sh("git", "remote", "get-url", "origin", cwd=r)
             # complete corresponding source of exactly what ships (needed for GPL/LGPL, harmless for MIT/0BSD)
