@@ -8,7 +8,7 @@ tested in-game (the hashes are written to the package's file list so they can be
 import hashlib, html, shutil, subprocess
 from pathlib import Path
 
-VERSION = "1.3.0"
+VERSION = "1.3.1"
 REPOS = Path("/mnt/h/dev/modding/skse-hotfixes")
 MODS = Path("/home/cinnabar/.local/share/eidos/skyrimse/mods")  # in-game test mods (tested DLLs)
 OUT = REPOS / "crutch-pack"
@@ -76,7 +76,7 @@ FIXES = [
          repo="transmog", dlls=["build/linux/SkyrimTransmogUI.dll"], lic="MIT",
          what="The repository had no build system; added one and rebuilt against CommonLibSSE-NG 11. Five slot-mask reads adapted to the NG 11 API, no behaviour change. Needs PrismaUI like the original."),
     dict(key="DynamicScarring", title="Dynamic Scarring and Healing", nexus=156627, ver="1.2", author="endermannnn (GitHub: Jehan1241)",
-         repo="dynamicscarring", dlls=[str(MODS / "SKSE Hotfix - Dynamic Scarring and Healing (Test)/SKSE/Plugins/DynamicScarringAndHealing.dll")],
+         repo="dynamicscarring", dlls=["build/linux/DynamicScarringAndHealing.dll"],
          lic="GPL-3.0",
          what="Rebuilt against CommonLibSSE-NG 11 (the original used a CommonLib from before Address Library v5). No hooks, no behaviour change."),
     dict(key="ConjurationLimitFix", title="Conjuration Limit Fix", nexus=117155, ver="1.4.1", author="Asrak",

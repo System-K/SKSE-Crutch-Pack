@@ -6,7 +6,7 @@ a crutch until the original authors release their own updates. Download: Nexus M
 This repository contains the packaging script and tools. The source of every DLL lives in a fork of the
 original repository, on a `hotfix/...` branch, so the changes against upstream are visible commit by commit.
 
-## Fixes in version 1.3.0
+## Fixes in version 1.3.1
 
 | Fix | Original (Nexus) | Original author | Licence | Hotfix source | What changed |
 |---|---|---|---|---|---|
